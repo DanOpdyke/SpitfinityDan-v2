@@ -67,8 +67,8 @@ public class MouseMovement : MonoBehaviour {
 						//player.playAnimation("Attack1");
 						//enemy.damage(player.getWeaponDamage()); //TODO Calculate auto attack damage
 						Vector3 enemyLookAt = enemy.gameObject.transform.position;
-						enemyLookAt.y = 25.20f;
-						transform.LookAt(enemyLookAt);
+						enemyLookAt.y = 3;
+						GameObject.FindGameObjectWithTag("Player").transform.LookAt(enemyLookAt);
 					}
 					//TODO See if we can make this all just one conditional
 					//If cooldown is complete, but too far away to attack
@@ -79,7 +79,9 @@ public class MouseMovement : MonoBehaviour {
 						direction.y = 22.20f;
 						if(direction.magnitude > 1)
 							direction = direction.normalized;
-						transform.LookAt(dest);
+						Vector3 toLookAt = dest;
+						toLookAt.y = 3;
+						GameObject.FindGameObjectWithTag("Player").transform.LookAt(toLookAt);
 						movingToAttack = true;
 					}
 					
@@ -89,10 +91,14 @@ public class MouseMovement : MonoBehaviour {
 				    dest = hit.point;
 					dest.y = 25.20f;
 				    direction = hit.point - transform.position;
-					direction.y = 22.20f;
+					direction.y = 22.02f;
 					if(direction.magnitude > 1)
 						direction = direction.normalized;
-					transform.LookAt(dest);
+					
+					Vector3 toLookAt = dest;
+					toLookAt.y = 3;
+					GameObject.FindGameObjectWithTag("Player").transform.LookAt(toLookAt);
+					//transform.LookAt(dest);
 				}
 			}
 		}
@@ -113,6 +119,7 @@ public class MouseMovement : MonoBehaviour {
 			Vector3 enemyLookAt = enemy.gameObject.transform.position;
 			enemyLookAt.y = 25.20f;
 			transform.LookAt(enemyLookAt);
+			
 			movingToAttack = false;
 			//nextAttack = Time.time + player.getWeaponSpeed();
 		}
@@ -122,7 +129,7 @@ public class MouseMovement : MonoBehaviour {
 		transform.position = Vector3.MoveTowards(transform.position, dest, PLAYER_MOVEMENT_SPEED);
 		if(delta.magnitude < .1f){ //Reach destination
 			transform.position = dest;
-			motor.inputMoveDirection = Vector3.zero;
+			//motor.inputMoveDirection = Vector3.zero;
 			player.setRunning(false);
 		
 		}
