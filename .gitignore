@@ -21,8 +21,9 @@ Library/BuildSettings.asset
 Library/DynamicsManager.asset
 Library/EditorSettings.asset
 Library/EditorUserBuildSettings.asset
+Library/EditorUserSettings.asset
 Library/expandedItems
-Library/http://FailedAssetImports.txt
+Library/FailedAssetImports.txt
 Library/guidmapper
 Library/InspectorExpandedItems.asset
 Library/MonoManager.asset
