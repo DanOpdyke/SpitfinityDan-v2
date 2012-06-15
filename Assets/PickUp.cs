@@ -1,20 +1,15 @@
 using UnityEngine;
 using System.Collections;
 
-public class PickUp : MonoBehaviour {
+public interface PickUp {
 
 	// Use this for initialization
-	void Start () {
-	
-	}
+	void Start ();
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
+	void Update ();
 	
 	// Primarily function to be implemented by child classes.
-	public void trigger(GarenScript player){
-		;
-	}
+	void trigger(GarenScript player);
+	
 }

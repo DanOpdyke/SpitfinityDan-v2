@@ -1,16 +1,16 @@
 using UnityEngine;
 using System.Collections;
 
-public class HealthOrbScript : PickUp {
-	private float healAmount;
+public class HealthOrbScript : MonoBehaviour, PickUp {
+	private float healAmount = 20;
 	
 	// Use this for initialization
-	void Start () {
+	public void Start () {
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public void Update () {
 	
 	}
 	

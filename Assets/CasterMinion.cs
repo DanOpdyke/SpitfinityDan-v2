@@ -2,13 +2,10 @@ using UnityEngine;
 using System.Collections;
 
 public class CasterMinion : MinionScript {
-	private Missle[] activeMissles;
 	private int numMaxMissles = 10;
 	private int index = 0;
 	
 	public GameObject wizmis;
-	
-	public Texture2D missleTexture;
 	
 	// Use this for initialization
 	void Start () {
@@ -17,7 +14,7 @@ public class CasterMinion : MinionScript {
 		animator = gameObject.GetComponent(typeof(Animation)) as Animation;
 		alive = true;
 		range = 70;
-		activeMissles = new Missle[numMaxMissles];
+		debuffs = new ArrayList();
 	}
 	
 	void OnGUI(){
@@ -26,11 +23,6 @@ public class CasterMinion : MinionScript {
 			GUI.Box(new Rect(healthBarPosition.x - 23, Screen.height - healthBarPosition.y - 70, 50 * getHealthPercent(), 10), healthTexture);
 		}
 		
-		foreach(Missle m in activeMissles){
-			if(m != null){
-				GUI.Label(new Rect(m.getX() - 23, m.getY(), 50, 50), missleTexture);
-			}
-		}
 	}
 	
 	// Update is called once per frame
@@ -41,6 +33,12 @@ public class CasterMinion : MinionScript {
 		if(!player.isAlive()){
 			return; //TODO make this more interesting after the player dies
 		}
+		
+		for(int i = 0; i < debuffs.Count; i++)
+			if(((Debuff)debuffs[i]).hasExpired()){
+				debuffs.Remove(i--);
+				Debug.Log("Debuff expired");
+			}
 		
 		if(Time.time > fleeTime)
 			fleeing = false;
@@ -122,29 +120,4 @@ public class CasterMinion : MinionScript {
 		
 	}
 	
-	class Missle {
-		float x;
-		float y;
-		
-		public void update(){
-			;//Move missle
-		}
-		
-		public float getX(){
-			return x;
-		}
-		
-		public float getY(){
-			return y;
-		}
-		
-		public void setX(float x){
-			this.x = x;
-		}
-		
-		public void setY(float y){
-			this.y = y;
-		}
-		
-	}
 }

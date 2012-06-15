@@ -19,6 +19,8 @@ public class MinionScript : MonoBehaviour {
 	
 	public GameObject healthOrb;
 	
+	protected ArrayList debuffs;
+	protected int maxNumDebuffs = 9;
 	
 	protected bool alive;
 	protected Animation animator;
@@ -30,6 +32,7 @@ public class MinionScript : MonoBehaviour {
 		maxHealth = 100;
 		animator = gameObject.GetComponent(typeof(Animation)) as Animation;
 		alive = true;
+		debuffs = new ArrayList();
 	}
 	
 	void OnGUI(){
@@ -47,6 +50,12 @@ public class MinionScript : MonoBehaviour {
 		if(!player.isAlive()){
 			return; //TODO make this more interesting after the player dies
 		}
+		
+
+		for(int i = 0; i < debuffs.Count; i++)
+			if(((Debuff)debuffs[i]).hasExpired()){
+				debuffs.Remove(i--);
+			}
 		
 		if(Time.time > fleeTime)
 			fleeing = false;
@@ -122,6 +131,10 @@ public class MinionScript : MonoBehaviour {
 	public void damage(float amount){
 		if(!alive)
 			return;
+		
+		foreach(Debuff debuff in debuffs)
+			amount = debuff.applyDebuff(amount);
+		
 		currentHealth -= amount;
 		if(currentHealth < 0){
 			animator.Stop();
@@ -154,5 +167,30 @@ public class MinionScript : MonoBehaviour {
 			
 			Instantiate(healthOrb, itemPosition, Quaternion.identity);
 		}
+	}
+	
+	// Applies a debuff
+	public void applyDebuff(Debuff debuff, bool stacking){
+		if(stacking){
+			bool appliedStack = false;
+			foreach(Debuff d in debuffs){
+				if(d.GetType() == debuff.GetType()){
+					d.applyStack(1);
+					appliedStack = true;
+				}
+			}
+			
+			if(!appliedStack)
+				if(debuffs.Count < maxNumDebuffs){
+					debuffs.Add(debuff);
+			}
+		}
+		else
+			if(debuffs.Count < maxNumDebuffs)
+				debuffs.Add(debuff);
+	}
+	
+	public ArrayList getDebuffs(){
+		return debuffs;	
 	}
 }

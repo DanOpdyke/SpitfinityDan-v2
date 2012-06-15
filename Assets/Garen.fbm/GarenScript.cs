@@ -15,11 +15,16 @@ public class GarenScript : MonoBehaviour {
 	public Texture2D courageTexture;
 	public Texture2D judgementTexture;
 	public Texture2D dJusticeTexture;
+	public Texture2D valorTexture;
+	public Texture2D mightOfDemaciaTexture;
+	public Texture2D valorDebuffTexture;
 	
 	
 	//Health textures
 	public Texture2D enemyHealthTexture;
 	public Texture2D playerHealthTexture;
+	
+	public Texture2D tooltipTexture;
 	
 	private bool alive;
 	public Texture2D healthTexture;
@@ -46,6 +51,16 @@ public class GarenScript : MonoBehaviour {
 	private int IconWidth;
 	private int IconHeight;
 	
+	private int debuffWidth = 30;
+	private int debuffHeight = 30;
+	
+	private string dStrikeTooltip = "Decisive Strike \n Garen becomes invulnerable to \n slows/snares for 1 second, in \n addition his next melee attack will \n deal increased damage in a short \n cone in front of him. ";
+	private string courageTooltip = "Courage \n  Garen shields himself, decreasing \n all damage taken by 30% for \n 3 seconds. ";
+	private string judgementTooltip = "Judgment \n Garen rapidly spings his sword \n around his body for 3 seconds, \n dealing 180% weapon damage as \n AoE over the duration. ";
+	private string demacianJusticeTooltip = "Demacian Justice \n Garen brings down Demacian Justice \n on his opponents, dealing 300% \n weapon damage spread across 5 closest \n enemies (within melee range x 2) \n and stunning for 1.5 seconds.";
+	private string mightOfDemaciaTooltip = "Might of Demacia \n Garen attacks targetted enemy for \n weapon damage. Subsequent attacks against \n this target deal 10% increased \n damage (stacks 3 times, max 30% \n increased damage for target attacked 3+ \n consecutive times)";
+	private string valorTooltip = "Valor \n Garen cleaves up to 3 \n targets in front of him \n for 50% weapon damage each.";
+	
 	private MinionScript currentEnemy;
 	
 	/*
@@ -59,14 +74,35 @@ public class GarenScript : MonoBehaviour {
 	 * */
 	
 	void OnGUI() {
+		
+		GUIStyle tooltipStyle = new GUIStyle();
+		tooltipStyle.fontSize = 18;
+		tooltipStyle.normal.background = tooltipTexture;
+		tooltipStyle.alignment = TextAnchor.MiddleCenter;
+	
+		#region Spells
 		GUI.BeginGroup(new Rect(Screen.width / 2 - (2 * IconWidth), Screen.height - 70, IconWidth * 4, IconHeight * 4));
 		
-		GUI.Button(new Rect(0, 0, IconWidth, IconHeight), dStrikeTexture);
-		GUI.Button(new Rect(IconWidth, 0, IconWidth, IconHeight), courageTexture);
-		GUI.Button(new Rect(IconWidth * 2, 0, IconWidth, IconHeight), judgementTexture);
-		GUI.Button(new Rect(IconWidth * 3, 0, IconWidth, IconHeight), dJusticeTexture);
+		GUI.Button(new Rect(0, 0, IconWidth, IconHeight), new GUIContent(dStrikeTexture, dStrikeTooltip));
+		GUI.Button(new Rect(IconWidth, 0, IconWidth, IconHeight), new GUIContent(courageTexture, courageTooltip));
+		GUI.Button(new Rect(IconWidth * 2, 0, IconWidth, IconHeight), new GUIContent(judgementTexture, judgementTooltip));
+		GUI.Button(new Rect(IconWidth * 3, 0, IconWidth, IconHeight), new GUIContent(dJusticeTexture, demacianJusticeTooltip));
 
 		GUI.EndGroup();
+
+		
+		
+		GUI.BeginGroup(new Rect(Screen.width - (2 * IconWidth) - 30, Screen.height - 70, IconWidth * 2, IconHeight * 2));
+		GUI.Button(new Rect(0, 0, IconWidth, IconHeight), new GUIContent(mightOfDemaciaTexture, mightOfDemaciaTooltip));
+		GUI.Button(new Rect(IconWidth, 0, IconWidth, IconHeight), new GUIContent(valorTexture, valorTooltip));
+		GUI.EndGroup();
+		
+		if(!string.IsNullOrEmpty(GUI.tooltip))
+			GUI.Box(new Rect (Screen.width / 2 - 450, Screen.height - 130, 300, 125), GUI.tooltip, tooltipStyle);
+		
+		//TODO Cooldown animation for Might of Demacia and Valor? (Weapon Speed)
+		
+		#endregion
 		
 		//Creates mask over buttons based on cooldown.
 		
@@ -88,6 +124,16 @@ public class GarenScript : MonoBehaviour {
 			GUI.BeginGroup(new Rect((Screen.width / 2) - (buttonLength / 2), 40, buttonLength * currentEnemy.getHealthPercent(), 30));
 			GUI.Box(new Rect(0, 0, buttonLength,30) , enemyHealthTexture);
 			GUI.EndGroup();
+			
+			GUI.BeginGroup(new Rect((Screen.width / 2) - (buttonLength / 2), 80, buttonLength, 30));
+			ArrayList debuffs = currentEnemy.getDebuffs();
+			int offsetX = 0;
+			foreach(Object debuff in debuffs){
+				GUI.Box(new Rect(offsetX, 0, debuffWidth, debuffHeight), ((Debuff)debuff).getTexture());
+				offsetX += debuffWidth;
+			}
+			GUI.EndGroup();
+			
 		}
 		
 		//Player Healthbar
@@ -178,7 +224,7 @@ public class GarenScript : MonoBehaviour {
 		Collider[] items = Physics.OverlapSphere(gameObject.transform.position, pickUpRange);
 		foreach(Collider itemCollider in items){
 			PickUp item	= itemCollider.gameObject.GetComponent(typeof(HealthOrbScript)) as PickUp;
-			if(item)
+			if(item != null)
 				item.trigger(this);
 		}
 	
@@ -292,8 +338,12 @@ public class GarenScript : MonoBehaviour {
 	 * */
 	public float autoAttack(MinionScript enemy){
 			a.Play("Attack" + (((int)(Random.value * 3)) + 1));
-		enemy.damage(WeaponDamage);
-		return Time.time + WeaponSpeed;
+			enemy.damage(WeaponDamage);
+			ValorDebuff debuff = new ValorDebuff();
+			debuff.setTexture(valorDebuffTexture);
+			debuff.refresh();
+			enemy.applyDebuff(debuff, true);
+			return Time.time + WeaponSpeed;
 	}
 	
 	
@@ -555,6 +605,13 @@ public class GarenScript : MonoBehaviour {
 		
 		public void setScript(GarenScript script){
 			player = script;
+		}
+		
+		public float getCooldown(){
+			if(Time.time > nextAttack)
+				return 0;
+			else
+				return (float)((nextAttack - Time.time) / player.getWeaponSpeed());
 		}
 	}
 }
