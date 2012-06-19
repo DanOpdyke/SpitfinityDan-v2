@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 7d9fa2c2fc88f5748a5d49dcef07e7da
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - coneCollider: {instanceID: 0}
+  - dStrikeTexture: {fileID: 2800000, guid: 8a5b45a3ab232504eba0bc0d05a446e7, type: 1}
+  - courageTexture: {fileID: 2800000, guid: 75095e73baa1f984286fc8ebfe3a1fc0, type: 1}
+  - judgementTexture: {fileID: 2800000, guid: 2c55d5b753ba145498c7de212799b927, type: 1}
+  - dJusticeTexture: {fileID: 2800000, guid: 94a2727c66b2ae7498392bda2c6b8145, type: 1}
+  - healthTexture: {fileID: 2800000, guid: da8d91116b1da7a4b9cf78a22caa6815, type: 1}
+  executionOrder: 0
+  icon: {instanceID: 0}

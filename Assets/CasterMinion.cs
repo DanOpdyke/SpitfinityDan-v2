@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class CasterMinion : MinionScript {
+public class CasterMinion : EnemyScript {
 	private int numMaxMissles = 10;
 	private int index = 0;
 	
@@ -9,12 +9,15 @@ public class CasterMinion : MinionScript {
 	
 	// Use this for initialization
 	void Start () {
-		currentHealth = 70;
-		maxHealth = 70;
-		animator = gameObject.GetComponent(typeof(Animation)) as Animation;
 		alive = true;
-		range = 70;
+		animator = gameObject.GetComponent(typeof(Animation)) as Animation;
+		currentHealth = 70;
 		debuffs = new ArrayList();
+		maxHealth = 70;
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent(typeof(PlayerScript)) as PlayerScript;
+		range = 70;
+		weaponDamage = 10;
+		weaponSpeed = 1.5f;
 	}
 	
 	void OnGUI(){
@@ -29,6 +32,9 @@ public class CasterMinion : MinionScript {
 	void Update () {
 	if(!alive)
 			return;
+		
+		if(player == null)
+			player = GameObject.FindGameObjectWithTag("Player").GetComponent(typeof(PlayerScript)) as PlayerScript;
 		
 		if(!player.isAlive()){
 			return; //TODO make this more interesting after the player dies
@@ -53,7 +59,7 @@ public class CasterMinion : MinionScript {
 			}
 		}
 		
-		float distance = (player.transform.position - gameObject.transform.position).magnitude;
+		float distance = (player.getGameObject().transform.position - gameObject.transform.position).magnitude;
 		
 		//If in attack range
 		if(distance <= range && !fleeing){
@@ -72,7 +78,7 @@ public class CasterMinion : MinionScript {
 					
 					GameObject temp = (GameObject) Instantiate(wizmis, spawnLocation, gameObject.transform.rotation);
 					ProjectileScript script = temp.GetComponent(typeof(ProjectileScript)) as ProjectileScript;
-					script.setDest(player.transform.position);
+					script.setDest(player.getGameObject().transform.position);
 					script.setPlayer(player);
 					
 					/*Missle m = new Missle();
@@ -95,7 +101,7 @@ public class CasterMinion : MinionScript {
 				animator.Play("Run");
 			}
 			if(!fleeing)
-				dest = player.transform.position;
+				dest = player.getGameObject().transform.position;
 			
 			//TODO Implement pathfinding algorithm to avoid running through objects
 			int directionX = dest.x > gameObject.transform.position.x ? 1 : -1;

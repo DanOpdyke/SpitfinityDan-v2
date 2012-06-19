@@ -1,0 +1,772 @@
+fileFormatVersion: 2
+guid: 2db04f6c3fff3b74587d2a378b9591e8
+ModelImporter:
+  fileIDToRecycleName:
+    4300000: transformVayne
+    7400000: Take 001 //// VayneAnimated
+    7400002: Dance //// VayneAnimated
+    7400004: Death //// VayneAnimated
+    7400006: Idle2 //// VayneAnimated
+    7400008: Idle3 //// VayneAnimated
+    7400010: Joke //// VayneAnimated
+    7400012: Laugh //// VayneAnimated
+    7400014: Taunt //// VayneAnimated
+    7400016: Idle1 //// VayneAnimated
+    7400018: Run //// VayneAnimated
+    7400020: TumbleIdle1 //// VayneAnimated
+    7400022: TumbleUltIdle1 //// VayneAnimated
+    7400024: UltIdle1 //// VayneAnimated
+    7400026: Attack1 //// VayneAnimated
+    7400028: Attack2 //// VayneAnimated
+    7400030: Crit //// VayneAnimated
+    7400032: Spell3 //// VayneAnimated
+    7400034: TumbleAttack1 //// VayneAnimated
+    7400036: TumbleRun //// VayneAnimated
+    7400038: TumbleUltAttack1 //// VayneAnimated
+    7400040: TumbleUltRun //// VayneAnimated
+    7400042: UltAttack1 //// VayneAnimated
+    7400044: UltRun //// VayneAnimated
+    7400046: Spell1 //// VayneAnimated
+  serializedVersion: 10
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    generateAnimations: 3
+    bakeSimulation: 0
+    splitAnimations: 1
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations:
+    - name: Dance
+      firstFrame: 0
+      lastFrame: 241
+      wrapMode: 0
+      loop: 0
+    - name: Death
+      firstFrame: 242
+      lastFrame: 397
+      wrapMode: 0
+      loop: 0
+    - name: Idle2
+      firstFrame: 398
+      lastFrame: 598
+      wrapMode: 0
+      loop: 0
+    - name: Idle3
+      firstFrame: 599
+      lastFrame: 734
+      wrapMode: 0
+      loop: 0
+    - name: Joke
+      firstFrame: 735
+      lastFrame: 855
+      wrapMode: 0
+      loop: 0
+    - name: Laugh
+      firstFrame: 856
+      lastFrame: 986
+      wrapMode: 0
+      loop: 0
+    - name: Taunt
+      firstFrame: 987
+      lastFrame: 1126
+      wrapMode: 0
+      loop: 0
+    - name: Idle1
+      firstFrame: 1127
+      lastFrame: 1226
+      wrapMode: 0
+      loop: 1
+    - name: Run
+      firstFrame: 1228
+      lastFrame: 1287
+      wrapMode: 0
+      loop: 0
+    - name: TumbleIdle1
+      firstFrame: 1289
+      lastFrame: 1388
+      wrapMode: 0
+      loop: 1
+    - name: TumbleUltIdle1
+      firstFrame: 1390
+      lastFrame: 1489
+      wrapMode: 0
+      loop: 1
+    - name: UltIdle1
+      firstFrame: 1491
+      lastFrame: 1590
+      wrapMode: 0
+      loop: 1
+    - name: Attack1
+      firstFrame: 1592
+      lastFrame: 1622
+      wrapMode: 0
+      loop: 0
+    - name: Attack2
+      firstFrame: 1623
+      lastFrame: 1653
+      wrapMode: 0
+      loop: 0
+    - name: Crit
+      firstFrame: 1654
+      lastFrame: 1684
+      wrapMode: 0
+      loop: 0
+    - name: Spell3
+      firstFrame: 1685
+      lastFrame: 1715
+      wrapMode: 0
+      loop: 0
+    - name: TumbleAttack1
+      firstFrame: 1717
+      lastFrame: 1745
+      wrapMode: 0
+      loop: 0
+    - name: TumbleRun
+      firstFrame: 1747
+      lastFrame: 1776
+      wrapMode: 0
+      loop: 0
+    - name: TumbleUltAttack1
+      firstFrame: 1779
+      lastFrame: 1807
+      wrapMode: 0
+      loop: 0
+    - name: TumbleUltRun
+      firstFrame: 1809
+      lastFrame: 1838
+      wrapMode: 0
+      loop: 0
+    - name: UltAttack1
+      firstFrame: 1840
+      lastFrame: 1870
+      wrapMode: 0
+      loop: 0
+    - name: UltRun
+      firstFrame: 1871
+      lastFrame: 1900
+      wrapMode: 0
+      loop: 0
+    - name: Spell1
+      firstFrame: 1902
+      lastFrame: 1924
+      wrapMode: 0
+      loop: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMesh: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  textMetaNamesToFileIDs:
+    //RootNode:
+      data:
+        first: 1
+        second: be860100
+      data:
+        first: 4
+        second: 9e1a0600
+      data:
+        first: 111
+        second: 605fa900
+    BUFFBONE_GLB_CHANNEL_LOC:
+      data:
+        first: 1
+        second: 06870100
+      data:
+        first: 4
+        second: e61a0600
+    BUFFBONE_GLB_GROUND_LOC:
+      data:
+        first: 1
+        second: 08870100
+      data:
+        first: 4
+        second: e81a0600
+    BUFFBONE_GLB_WEAPON_1:
+      data:
+        first: 1
+        second: 0e870100
+      data:
+        first: 4
+        second: ee1a0600
+    C_BUFFBONE_GLB_CENTER_LOC:
+      data:
+        first: 1
+        second: 0c870100
+      data:
+        first: 4
+        second: ec1a0600
+    C_BUFFBONE_GLB_CHEST_LOC:
+      data:
+        first: 1
+        second: 14870100
+      data:
+        first: 4
+        second: f41a0600
+    C_BUFFBONE_GLB_HEAD_LOC:
+      data:
+        first: 1
+        second: 16870100
+      data:
+        first: 4
+        second: f61a0600
+    C_BUFFBONE_GLB_LAYOUT_LOC:
+      data:
+        first: 1
+        second: 04870100
+      data:
+        first: 4
+        second: e41a0600
+    C_BUFFBONE_GLB_OVERHEAD_LOC:
+      data:
+        first: 1
+        second: 0a870100
+      data:
+        first: 4
+        second: ea1a0600
+    L_BUFFBONE_GLB_FOOT_LOC:
+      data:
+        first: 1
+        second: 12870100
+      data:
+        first: 4
+        second: f21a0600
+    L_BUFFBONE_GLB_HAND_LOC:
+      data:
+        first: 1
+        second: 1c870100
+      data:
+        first: 4
+        second: fc1a0600
+    L_PARENTING_HAND_LOC:
+      data:
+        first: 1
+        second: 1e870100
+      data:
+        first: 4
+        second: fe1a0600
+    R_BUFFBONE_GLB_FOOT_LOC:
+      data:
+        first: 1
+        second: 10870100
+      data:
+        first: 4
+        second: f01a0600
+    R_BUFFBONE_GLB_HAND_LOC:
+      data:
+        first: 1
+        second: 18870100
+      data:
+        first: 4
+        second: f81a0600
+    R_PARENTING_HAND_LOC:
+      data:
+        first: 1
+        second: 1a870100
+      data:
+        first: 4
+        second: fa1a0600
+    b_weapon:
+      data:
+        first: 1
+        second: e0860100
+      data:
+        first: 4
+        second: c01a0600
+    b_weapon_b:
+      data:
+        first: 1
+        second: de860100
+      data:
+        first: 4
+        second: be1a0600
+    b_weapon_c:
+      data:
+        first: 1
+        second: dc860100
+      data:
+        first: 4
+        second: bc1a0600
+    b_weapon_d:
+      data:
+        first: 1
+        second: da860100
+      data:
+        first: 4
+        second: ba1a0600
+    b_weapon_e:
+      data:
+        first: 1
+        second: d8860100
+      data:
+        first: 4
+        second: b81a0600
+    chest:
+      data:
+        first: 1
+        second: fe860100
+      data:
+        first: 4
+        second: de1a0600
+    flask:
+      data:
+        first: 1
+        second: b8860100
+      data:
+        first: 4
+        second: 981a0600
+    hair:
+      data:
+        first: 1
+        second: 3e870100
+      data:
+        first: 4
+        second: 1e1b0600
+    hair_a:
+      data:
+        first: 1
+        second: 3c870100
+      data:
+        first: 4
+        second: 1c1b0600
+    hair_b:
+      data:
+        first: 1
+        second: 3a870100
+      data:
+        first: 4
+        second: 1a1b0600
+    hair_c:
+      data:
+        first: 1
+        second: 38870100
+      data:
+        first: 4
+        second: 181b0600
+    hair_d:
+      data:
+        first: 1
+        second: 36870100
+      data:
+        first: 4
+        second: 161b0600
+    head:
+      data:
+        first: 1
+        second: 40870100
+      data:
+        first: 4
+        second: 201b0600
+    hip:
+      data:
+        first: 1
+        second: 20870100
+      data:
+        first: 4
+        second: 001b0600
+    l_foot:
+      data:
+        first: 1
+        second: b2860100
+      data:
+        first: 4
+        second: 921a0600
+    l_forearm:
+      data:
+        first: 1
+        second: f8860100
+      data:
+        first: 4
+        second: d81a0600
+    l_hand:
+      data:
+        first: 1
+        second: f6860100
+      data:
+        first: 4
+        second: d61a0600
+    l_index:
+      data:
+        first: 1
+        second: f4860100
+      data:
+        first: 4
+        second: d41a0600
+    l_index_b:
+      data:
+        first: 1
+        second: f2860100
+      data:
+        first: 4
+        second: d21a0600
+    l_knee:
+      data:
+        first: 1
+        second: b4860100
+      data:
+        first: 4
+        second: 941a0600
+    l_middle:
+      data:
+        first: 1
+        second: f0860100
+      data:
+        first: 4
+        second: d01a0600
+    l_middle_b:
+      data:
+        first: 1
+        second: ee860100
+      data:
+        first: 4
+        second: ce1a0600
+    l_pinky:
+      data:
+        first: 1
+        second: ec860100
+      data:
+        first: 4
+        second: cc1a0600
+    l_pinky_b:
+      data:
+        first: 1
+        second: ea860100
+      data:
+        first: 4
+        second: ca1a0600
+    l_ring:
+      data:
+        first: 1
+        second: e8860100
+      data:
+        first: 4
+        second: c81a0600
+    l_ring_b:
+      data:
+        first: 1
+        second: e6860100
+      data:
+        first: 4
+        second: c61a0600
+    l_shoulder:
+      data:
+        first: 1
+        second: fc860100
+      data:
+        first: 4
+        second: dc1a0600
+    l_thigh:
+      data:
+        first: 1
+        second: b6860100
+      data:
+        first: 4
+        second: 961a0600
+    l_thumb:
+      data:
+        first: 1
+        second: e4860100
+      data:
+        first: 4
+        second: c41a0600
+    l_thumb_b:
+      data:
+        first: 1
+        second: e2860100
+      data:
+        first: 4
+        second: c21a0600
+    l_toe:
+      data:
+        first: 1
+        second: b0860100
+      data:
+        first: 4
+        second: 901a0600
+    l_uparm:
+      data:
+        first: 1
+        second: fa860100
+      data:
+        first: 4
+        second: da1a0600
+    l_weapon:
+      data:
+        first: 1
+        second: a4860100
+      data:
+        first: 4
+        second: 841a0600
+    l_weapon_b:
+      data:
+        first: 1
+        second: a2860100
+      data:
+        first: 4
+        second: 821a0600
+    l_weapon_c:
+      data:
+        first: 1
+        second: a0860100
+      data:
+        first: 4
+        second: 801a0600
+    lb_cloth:
+      data:
+        first: 1
+        second: 30870100
+      data:
+        first: 4
+        second: 101b0600
+    lb_cloth_b:
+      data:
+        first: 1
+        second: 2e870100
+      data:
+        first: 4
+        second: 0e1b0600
+    lb_cloth_c:
+      data:
+        first: 1
+        second: 2c870100
+      data:
+        first: 4
+        second: 0c1b0600
+    mb_cloth:
+      data:
+        first: 1
+        second: 32870100
+      data:
+        first: 4
+        second: 121b0600
+    mb_cloth_b:
+      data:
+        first: 1
+        second: 2a870100
+      data:
+        first: 4
+        second: 0a1b0600
+    mb_cloth_c:
+      data:
+        first: 1
+        second: 28870100
+      data:
+        first: 4
+        second: 081b0600
+    mouth:
+      data:
+        first: 1
+        second: 34870100
+      data:
+        first: 4
+        second: 141b0600
+    neck:
+      data:
+        first: 1
+        second: 42870100
+      data:
+        first: 4
+        second: 221b0600
+    r_foot:
+      data:
+        first: 1
+        second: aa860100
+      data:
+        first: 4
+        second: 8a1a0600
+    r_forearm:
+      data:
+        first: 1
+        second: d2860100
+      data:
+        first: 4
+        second: b21a0600
+    r_hand:
+      data:
+        first: 1
+        second: d0860100
+      data:
+        first: 4
+        second: b01a0600
+    r_knee:
+      data:
+        first: 1
+        second: ac860100
+      data:
+        first: 4
+        second: 8c1a0600
+    r_middle:
+      data:
+        first: 1
+        second: ce860100
+      data:
+        first: 4
+        second: ae1a0600
+    r_middle_b:
+      data:
+        first: 1
+        second: cc860100
+      data:
+        first: 4
+        second: ac1a0600
+    r_shoulder:
+      data:
+        first: 1
+        second: d6860100
+      data:
+        first: 4
+        second: b61a0600
+    r_thigh:
+      data:
+        first: 1
+        second: ae860100
+      data:
+        first: 4
+        second: 8e1a0600
+    r_thumb:
+      data:
+        first: 1
+        second: 46870100
+      data:
+        first: 4
+        second: 261b0600
+    r_thumb_b:
+      data:
+        first: 1
+        second: 44870100
+      data:
+        first: 4
+        second: 241b0600
+    r_toe:
+      data:
+        first: 1
+        second: a8860100
+      data:
+        first: 4
+        second: 881a0600
+    r_uparm:
+      data:
+        first: 1
+        second: d4860100
+      data:
+        first: 4
+        second: b41a0600
+    r_weapon:
+      data:
+        first: 1
+        second: ca860100
+      data:
+        first: 4
+        second: aa1a0600
+    r_weapon_b:
+      data:
+        first: 1
+        second: c8860100
+      data:
+        first: 4
+        second: a81a0600
+    r_weapon_c:
+      data:
+        first: 1
+        second: c6860100
+      data:
+        first: 4
+        second: a61a0600
+    rb_cloth:
+      data:
+        first: 1
+        second: 26870100
+      data:
+        first: 4
+        second: 061b0600
+    rb_cloth_b:
+      data:
+        first: 1
+        second: 24870100
+      data:
+        first: 4
+        second: 041b0600
+    rb_cloth_c:
+      data:
+        first: 1
+        second: 22870100
+      data:
+        first: 4
+        second: 021b0600
+    root:
+      data:
+        first: 1
+        second: 02870100
+      data:
+        first: 4
+        second: e21a0600
+      data:
+        first: 137
+        second: a00bd100
+    spine:
+      data:
+        first: 1
+        second: 00870100
+      data:
+        first: 4
+        second: e01a0600
+    transformVayne:
+      data:
+        first: 1
+        second: c0860100
+      data:
+        first: 4
+        second: a01a0600
+    weapon:
+      data:
+        first: 1
+        second: a6860100
+      data:
+        first: 4
+        second: 861a0600
+    weapon_b:
+      data:
+        first: 1
+        second: c4860100
+      data:
+        first: 4
+        second: a41a0600
+    weapon_b1:
+      data:
+        first: 1
+        second: c2860100
+      data:
+        first: 4
+        second: a21a0600
+    weapon_b2:
+      data:
+        first: 1
+        second: bc860100
+      data:
+        first: 4
+        second: 9c1a0600
+    weapon_c:
+      data:
+        first: 1
+        second: ba860100
+      data:
+        first: 4
+        second: 9a1a0600

@@ -8,7 +8,7 @@ public class ProjectileScript : MonoBehaviour {
 	private float radius = 5;
 	private float damage = 5;
 	
-	private GarenScript player;
+	private PlayerScript player;
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +22,7 @@ public class ProjectileScript : MonoBehaviour {
 			return;
 		}
 		
-		Vector3 playerPosition = player.transform.position;
+		Vector3 playerPosition = player.getGameObject().transform.position;
 		Vector3 misslePosition = gameObject.transform.position;
 		
 		misslePosition.y = playerPosition.y; //Do not worry about differences in Y
@@ -55,7 +55,7 @@ public class ProjectileScript : MonoBehaviour {
 		destination = dest;	
 	}
 	
-	public void setPlayer(GarenScript player){
+	public void setPlayer(PlayerScript player){
 		this.player = player;	
 	}
 	

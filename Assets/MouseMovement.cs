@@ -9,7 +9,7 @@ public class MouseMovement : MonoBehaviour {
 	private CharacterMotor motor;
 	private RaycastHit hit;
 	private float nextAttack = 0;
-	private GarenScript player;
+	private PlayerScript player;
 	private bool movingToAttack = false;
 	private bool attacking = false;
 	
@@ -20,13 +20,13 @@ public class MouseMovement : MonoBehaviour {
 	void Start () {
 		dest = transform.position;
 		motor = GetComponent(typeof(CharacterMotor)) as CharacterMotor;
-		player = gameObject.GetComponentInChildren(typeof(GarenScript)) as GarenScript;
+		player = gameObject.GetComponentInChildren(typeof(PlayerScript)) as PlayerScript;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
-		if(!player.isAlive())
+		if(!player.isAlive() || player.stunned())
 			return;
 		
 		/*
@@ -46,7 +46,7 @@ public class MouseMovement : MonoBehaviour {
 			player.playIdleSequence();
 
 		//Check for mouse click and update destination
-		if(Input.GetButtonDown("Fire1")){
+		if(Input.GetButtonDown("Fire1") && !player.guiInteraction(Input.mousePosition)){
 			idling = false;
 			player.setIdling(false);
 			
@@ -57,11 +57,18 @@ public class MouseMovement : MonoBehaviour {
 			Ray ray = Camera.allCameras[0].ScreenPointToRay(Input.mousePosition);
 			
 			if(Physics.Raycast(ray, out hit, 10000)){
-				MinionScript enemy = hit.collider.gameObject.GetComponent(typeof(MinionScript)) as MinionScript;
+				ItemLootScript loot = hit.collider.gameObject.GetComponent(typeof(ItemLootScript)) as ItemLootScript;
+				if(loot){
+					player.awardItem(loot.getItem());
+					Destroy(loot.gameObject);
+					return;
+				}
+				
+				EnemyScript enemy = hit.collider.gameObject.GetComponent(typeof(EnemyScript)) as EnemyScript;
 				if(enemy){ //If target is an enemy
 					attacking = true;
 					player.setCurrentEnemy(enemy);
-					if(Time.time > nextAttack && ((enemy.gameObject.transform.position - player.gameObject.transform.position).magnitude <= player.getRange())){
+					if(Time.time > nextAttack && ((enemy.gameObject.transform.position - player.getGameObject().transform.position).magnitude <= player.getRange())){
 						nextAttack = player.autoAttack(enemy);
 						//nextAttack = Time.time + player.getWeaponSpeed();
 						//player.playAnimation("Attack1");
@@ -109,8 +116,8 @@ public class MouseMovement : MonoBehaviour {
 		
 		//Moving towards target to attack, and gets within range.
 		if(attacking && player.getCurrentEnemy() != null && Time.time > nextAttack && 
-				(player.getCurrentEnemy().gameObject.transform.position - player.gameObject.transform.position).magnitude <= player.getRange()){
-			MinionScript enemy = player.getCurrentEnemy();
+				(player.getCurrentEnemy().gameObject.transform.position - player.getGameObject().transform.position).magnitude <= player.getRange()){
+			EnemyScript enemy = player.getCurrentEnemy();
 			dest = transform.position; //Stop moving
 			dest.y = 25.20f;
 			nextAttack = player.autoAttack(enemy);

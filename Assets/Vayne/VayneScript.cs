@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class VayneScript : MonoBehaviour {
+public class VayneScript : MonoBehaviour, PlayerScript {
 	
 	//Spells
 	private Tumble tumble;
@@ -24,6 +24,7 @@ public class VayneScript : MonoBehaviour {
 	private bool alive;
 	public Texture2D healthTexture;
 	
+	private bool poisoned;
 	
 	private float nextAttack = 0;
 	private float currentHealth;
@@ -46,7 +47,7 @@ public class VayneScript : MonoBehaviour {
 	private int IconWidth;
 	private int IconHeight;
 	
-	private MinionScript currentEnemy;
+	private EnemyScript currentEnemy;
 	
 	/*
 	 * CONE
@@ -130,6 +131,16 @@ public class VayneScript : MonoBehaviour {
 		//spinning = false;
 		
 		alive = true;
+		
+	}
+	
+	public bool stunned(){
+		//TODO Implement stunned after auto attack
+		return false;
+	}
+	
+	void Awake() {
+		DontDestroyOnLoad(this.gameObject);
 	}
 	
 	
@@ -189,6 +200,23 @@ public class VayneScript : MonoBehaviour {
 	
 	}
 	
+	public void awardItem(Item item){
+	}
+	
+	public bool guiInteraction(Vector3 mousePosition){
+		/*if(inventoryOpen)
+			if(mousePosition.x >= inventoryRect.x && mousePosition.x < (inventoryRect.x + inventoryRect.width))
+				if(mousePosition.y >= inventoryRect.y && mousePosition.y < (inventoryRect.y + inventoryRect.width))
+					return true;
+		
+		if(characterSheetOpen)
+			if(mousePosition.x >= equipmentRect.x && mousePosition.x < (equipmentRect.x + equipmentRect.width))
+				if(mousePosition.y >= equipmentRect.y && mousePosition.y < (equipmentRect.y + equipmentRect.width))
+					return true;*/
+		
+		return false;
+	}
+	
 	public void playIdleSequence(){
 		if(!a.isPlaying){
 			int num = ((int) (Random.value * 3)) + 1;
@@ -218,7 +246,7 @@ public class VayneScript : MonoBehaviour {
 		return currentHealth / maxHealth;
 	}
 	
-	public void setCurrentEnemy(MinionScript enemy){
+	public void setCurrentEnemy(EnemyScript enemy){
 		this.currentEnemy = enemy;	
 	}
 	
@@ -226,7 +254,7 @@ public class VayneScript : MonoBehaviour {
 		idling = idle;
 	}
 
-	public MinionScript getCurrentEnemy(){
+	public EnemyScript getCurrentEnemy(){
 		return currentEnemy;	
 	}
 	
@@ -239,6 +267,10 @@ public class VayneScript : MonoBehaviour {
 
 	public float getWeaponSpeed(){
 		return WeaponSpeed;
+	}
+	
+	public GameObject getGameObject(){
+		return gameObject;	
 	}
 	
 
@@ -286,10 +318,18 @@ public class VayneScript : MonoBehaviour {
 		//Check for death
 	}
 	
+	public void setPoisoned(bool poisoned){
+		this.poisoned = poisoned;
+	}
+	
+	public bool isPoisoned(){
+		return poisoned;
+	}
+	
 	/*
 	 * Returns the time of the next auto-attack
 	 * */
-	public float autoAttack(MinionScript enemy){
+	public float autoAttack(EnemyScript enemy){
 		float damageAmount = getWeaponDamage();
 		if(finalHourActive){
 			damageAmount *= 1.4f;
@@ -326,7 +366,7 @@ public class VayneScript : MonoBehaviour {
 			/*Vector3 position = player.gameObject.transform.position;
 			Collider[] enemies = Physics.OverlapSphere(position, 30);
 			foreach(Collider enemyCol in enemies){
-				MinionScript enemy = enemyCol.gameObject.GetComponent(typeof(MinionScript)) as MinionScript;
+				EnemyScript enemy = enemyCol.gameObject.GetComponent(typeof(EnemyScript)) as EnemyScript;
 				if(enemy){
 					Vector3 direction = Vector3.Normalize(enemy.gameObject.transform.position - player.gameObject.transform.position);
 					float dot = Vector3.Dot(direction, player.gameObject.transform.forward);
@@ -478,7 +518,7 @@ public class VayneScript : MonoBehaviour {
 		}
 		
 		public void Update(){
-			MinionScript enemy = player.getCurrentEnemy();
+			EnemyScript enemy = player.getCurrentEnemy();
 			
 			if(enemy != null){
 				enemy.damage((float)totalDamage);
@@ -567,11 +607,11 @@ public class VayneScript : MonoBehaviour {
 			
 			nextAttack = Time.time + player.WeaponSpeed;
 			Vector3 position = player.gameObject.transform.position;
-			MinionScript[] enemies = new MinionScript[numPossibleTargets];
+			EnemyScript[] enemies = new EnemyScript[numPossibleTargets];
 			int index = 0;
 			Collider[] targets = Physics.OverlapSphere(position, radius);
 			foreach(Collider t in targets){
-				MinionScript enemy = player.getCurrentEnemy();
+				EnemyScript enemy = player.getCurrentEnemy();
 				if(enemy){
 					Vector3 direction = Vector3.Normalize(enemy.gameObject.transform.position - player.gameObject.transform.position);
 					float dot = Vector3.Dot(direction, player.gameObject.transform.forward);
@@ -588,7 +628,7 @@ public class VayneScript : MonoBehaviour {
 				return;
 			
 			float damagePerTarget = player.WeaponDamage * 0.5f;
-			foreach(MinionScript enemy in enemies){
+			foreach(EnemyScript enemy in enemies){
 				if(enemy)
 					enemy.damage(damagePerTarget);
 			}
@@ -598,4 +638,5 @@ public class VayneScript : MonoBehaviour {
 			player = script;
 		}
 	}
+	
 }

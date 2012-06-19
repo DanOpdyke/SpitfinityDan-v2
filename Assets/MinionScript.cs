@@ -1,38 +1,19 @@
 using UnityEngine;
 using System.Collections;
 
-public class MinionScript : MonoBehaviour {
-	public Texture2D healthTexture;
-	protected float currentHealth;
-	protected float maxHealth;
-	protected float originalXScale;
-	protected float range = 10;
-	protected float weaponDamage = 10;
-	protected float weaponSpeed = 1.5f;
-	protected float nextAttack = 0;
-	protected float movespeed = 0.1f;
-	
-	protected Vector3 dest;
-	
-	protected bool fleeing;
-	protected float fleeTime;
-	
-	public GameObject healthOrb;
-	
-	protected ArrayList debuffs;
-	protected int maxNumDebuffs = 9;
-	
-	protected bool alive;
-	protected Animation animator;
-	public GarenScript player;
+public class MinionScript : EnemyScript {
 	
 	// Use this for initialization
 	void Start () {
-		currentHealth = 100;
-		maxHealth = 100;
-		animator = gameObject.GetComponent(typeof(Animation)) as Animation;
 		alive = true;
+		animator = gameObject.GetComponent(typeof(Animation)) as Animation;
+		currentHealth = 100;
 		debuffs = new ArrayList();
+		maxHealth = 100;
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent(typeof(PlayerScript)) as PlayerScript;
+		range = 10;
+		weaponDamage = 10;
+		weaponSpeed = 1.3f;
 	}
 	
 	void OnGUI(){
@@ -46,6 +27,9 @@ public class MinionScript : MonoBehaviour {
 	void Update () {
 		if(!alive)
 			return;
+		
+		if(player == null)
+			player = GameObject.FindGameObjectWithTag("Player").GetComponent(typeof(PlayerScript)) as PlayerScript;
 		
 		if(!player.isAlive()){
 			return; //TODO make this more interesting after the player dies
@@ -70,7 +54,7 @@ public class MinionScript : MonoBehaviour {
 			}
 		}
 		
-		float distance = (player.transform.position - gameObject.transform.position).magnitude;
+		float distance = (player.getGameObject().transform.position - gameObject.transform.position).magnitude;
 		
 		//If in attack range
 		if(distance <= range && !fleeing){
@@ -95,7 +79,7 @@ public class MinionScript : MonoBehaviour {
 				animator.Play("Run");
 			}
 			if(!fleeing)
-				dest = player.transform.position;
+				dest = player.getGameObject().transform.position;
 			
 			//TODO Implement pathfinding algorithm to avoid running through objects
 			int directionX = dest.x > gameObject.transform.position.x ? 1 : -1;
@@ -153,6 +137,8 @@ public class MinionScript : MonoBehaviour {
 		return dest;
 	}
 	private void DropLoot(){
+		
+		//Drop health orbs
 		if(Random.value >= 0.5f)
 		{
 			Vector3 itemPosition = transform.position;
@@ -170,6 +156,11 @@ public class MinionScript : MonoBehaviour {
 			
 			Instantiate(healthOrb, itemPosition, Quaternion.identity);
 		}
+		
+		//Drop item loot
+		
+		GameObject loot = (GameObject) Instantiate(itemLoot, transform.position, Quaternion.identity);
+		(loot.GetComponent(typeof(ItemLootScript)) as ItemLootScript).randomizeItem();
 	}
 	
 	// Applies a debuff
