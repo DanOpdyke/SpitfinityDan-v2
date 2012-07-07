@@ -1,0 +1,18 @@
+<Position>
+-152.551,22.21441,-379.9814
+</Position>
+<Inventory>
+Weapon, TwoHandedSword,Dull Two-Handed Sword of Power,1,12,0,0,11,10.48969,2.004374,2HSwordTextures/texture1,
+Armor, Helm,Worn Helm of Fortitude,1,2,0,0,9,HelmTextures/texture1
+Armor, Chest,Worn Chest of Fortitude,1,5,0,0,14,ChestTextures/texture2
+Armor, Gloves,Worn Gloves of Wisdom,1,0,0,16,6,GlovesTextures/texture3
+Armor, Boots,Worn Boots of Wisdom,1,2,4,7,0,BootTextures/texture3
+</Inventory>
+<DateStamp>
+7/7/2012 5:07 PM
+</DateStamp>
+<Level>
+1
+</Level>
+<Equipment>
+</Equipment>

@@ -1,0 +1,22 @@
+<Position>
+69.40682,22,-92.00613
+</Position>
+<Inventory>
+Weapon, TwoHandedSword,Dull Two-Handed Sword of Wisdom,1,0,3,7,0,17.54981,2.398628,2HSwordTextures/texture1,
+Armor, Gloves,Worn Gloves of Wisdom,1,0,0,21,0,GlovesTextures/texture1
+Armor, Boots,Worn Boots of Power,1,16,0,0,0,BootTextures/texture5
+Weapon, Bow,Dull Crossbow of Quickness,1,0,10,9,6,10.03519,1.989983,BowTextures/texture2,
+</Inventory>
+<DateStamp>
+7/7/2012 5:06 PM
+</DateStamp>
+<Level>
+1
+</Level>
+<Equipment>
+Armor, Helm,Worn Helm of Wisdom,1,0,5,9,0,HelmTextures/texture1
+Weapon, TwoHandedSword,Engineered Two-Handed Sword of Wisdom,4,13,13,14,0,64.50459,2.263281,2HSwordTextures/texture2,
+Armor, Chest,Worn Chest of Fortitude,1,0,7,7,10,ChestTextures/texture9
+Armor, Gloves,Worn Gloves of Wisdom,1,2,2,3,0,GlovesTextures/texture1
+Armor, Boots,Worn Boots of Power,1,15,8,0,0,BootTextures/texture4
+</Equipment>

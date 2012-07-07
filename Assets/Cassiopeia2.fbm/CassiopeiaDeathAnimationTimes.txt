@@ -1,0 +1,10 @@
+CassiopeiaDeath animation times
+
+Name        Start     End    Length
+Aftermath   0         300    300
+Death       301       361    60
+Idle        362       412    50
+
+
+Full animation - 412 frames
+

@@ -42,9 +42,9 @@ ModelImporter:
       loop: 0
     - name: Dance
       firstFrame: 186
-      lastFrame: 246
-      wrapMode: 0
-      loop: 0
+      lastFrame: 245
+      wrapMode: 2
+      loop: 1
     - name: Idle1
       firstFrame: 247
       lastFrame: 306

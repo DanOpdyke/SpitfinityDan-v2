@@ -1,0 +1,18 @@
+<Position>
+-144.2164,5.702944,-365.1236
+</Position>
+<Inventory>
+Weapon, Bow,Dull Crossbow of Power,1,12,0,8,0,9001,2.402915,BowTextures/texture1, "ITS OVER 9000!"
+Armor, Helm,Worn Helm of Fortitude,1,5,0,0,8,HelmTextures/texture2
+Armor, Chest,Worn Chest of Fortitude,1,6,0,0,10,ChestTextures/texture6
+Armor, Gloves,Worn Gloves of Quickness,1,2,9,1,0,GlovesTextures/texture3
+Armor, Boots,Worn Boots of Quickness,1,0,3,2,0,BootTextures/texture5
+</Inventory>
+<DateStamp>
+6/30/2012 1:54 PM
+</DateStamp>
+<Level>
+2
+</Level>
+<Equipment>
+</Equipment>

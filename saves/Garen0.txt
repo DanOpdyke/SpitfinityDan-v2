@@ -1,0 +1,22 @@
+<Position>
+72.79459,22,-91.48824
+</Position>
+<Inventory>
+Armor, Boots,Worn Boots of Power,1,7,6,0,4,BootTextures/texture5
+Armor, Boots,Sturdy Boots of Power,3,4,4,0,4,BootTextures/texture5
+Weapon, TwoHandedSword,Dull Two-Handed Sword of Quickness,1,0,14,0,0,6.462853,1.912089,2HSwordTextures/texture0,
+Weapon, Bow,Rusty Crossbow of Quickness,0,9,13,0,0,3.567467,2.07113,BowTextures/texture6,
+</Inventory>
+<DateStamp>
+6/30/2012 1:46 PM
+</DateStamp>
+<Level>
+1
+</Level>
+<Equipment>
+Armor, Helm,Worn Helm of Fortitude,1,0,3,0,4,HelmTextures/texture3
+Weapon, TwoHandedSword,Dull Two-Handed Sword of Power,1,17,0,8,0,21.81123,2.19669,2HSwordTextures/texture5,
+Armor, Chest,Worn Chest of Fortitude,1,0,7,0,8,ChestTextures/texture2
+Armor, Gloves,Worn Gloves of Quickness,1,8,9,0,5,GlovesTextures/texture3
+Armor, Boots,Heavy Boots of Quickness,5,14,20,0,13,BootTextures/texture3
+</Equipment>

@@ -1,21 +1,54 @@
+/*
+ * Filename: MinionScript.cs
+ * 
+ * Author:
+ * 		Programming: Daniel Opdyke
+ * 
+ * Last Modified: 7/6/2012
+ * 
+ * NOTE: All Models, Original Character Concepts, and Icons are property of Riot Games.
+ * */
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// The Minion script simluates the basic behavior of a melee minion. If the Player is outside of the minion's
+/// attack range, it will attempt to move towards the Player. In future iterations, minions will be given pathfinding
+/// scripts, as currently they will get stuck at walls between themself and the Player.
+///
+/// Currently, there is a fairly large amount of redundent code between the melee and caster minion's update functions. In future
+/// iterations, the redundant code will be moved into the EnemyScript super class, and each subclass will begin their update functions
+/// by called "Super.Update()".
+/// </summary>
 public class MinionScript : EnemyScript {
 	
 	// Use this for initialization
 	void Start () {
 		alive = true;
-		animator = gameObject.GetComponent(typeof(Animation)) as Animation;
-		currentHealth = 100;
-		debuffs = new ArrayList();
-		maxHealth = 100;
+		
+		//We generally like to avoid try catch blockes. However, in Unity, it is required that a "dummy" instance of every object be 
+		//present at the beginning of the game, or more mobs cannot be spawned. Since this "dummy" instance is present before the player
+		//is instantied, it will be unable to find the player, and this initialization will fail. To remedy this situation, we surround
+		//this assignment in a try-catch, then look to update the assignment in the "update" function. Future iterations should look
+		//to address this Unity flaw.
+		try{
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent(typeof(PlayerScript)) as PlayerScript;
-		range = 10;
-		weaponDamage = 10;
+		} catch{
+			;	
+		}
+		
+		animator = gameObject.GetComponent(typeof(Animation)) as Animation;
+		debuffs = new Hashtable();
+		maxHealth = 150 * Mathf.Pow(2, player.Level);
+		currentHealth = maxHealth;
+		range = 20;
+		weaponDamage = 15 * Mathf.Pow(2, player.Level);
 		weaponSpeed = 1.3f;
 	}
 	
+	/// <summary>
+	/// Draws the minion's health bar above their position.
+	/// </summary>
 	void OnGUI(){
 		if(getHealthPercent() > 0){ //If not dead
 			Vector3 healthBarPosition = Camera.main.WorldToScreenPoint(gameObject.transform.position);
@@ -25,7 +58,10 @@ public class MinionScript : EnemyScript {
 	
 	// Update is called once per frame
 	void Update () {
-		if(!alive)
+		if(Time.time > deathTimer && !alive)
+			Destroy(gameObject);
+		
+		if(!alive || Time.time < stunTime)
 			return;
 		
 		if(player == null)
@@ -36,10 +72,19 @@ public class MinionScript : EnemyScript {
 		}
 		
 
-		for(int i = 0; i < debuffs.Count; i++)
-			if(((Debuff)debuffs[i]).hasExpired()){
-				debuffs.Remove(i--);
+		string[] keys = new string[debuffs.Keys.Count];
+		debuffs.Keys.CopyTo(keys, 0);
+		
+		//Check for expired debuffs
+		foreach(string obj in keys){
+			Debuff debuff = (Debuff) debuffs[obj];
+			if(debuff.hasExpired()){
+				debuff.expire(player);
+				debuffs.Remove(debuff.name());
 			}
+		}
+		
+		updateDebuffs();
 		
 		if(Time.time > fleeTime)
 			fleeing = false;
@@ -74,6 +119,8 @@ public class MinionScript : EnemyScript {
 		
 		//If not in attack range
 		else{
+			if(snareTimer > Time.time)
+				return;
 			if(!animator.IsPlaying("Run")){
 				animator.Stop();
 				animator.Play("Run");
@@ -94,48 +141,37 @@ public class MinionScript : EnemyScript {
 			if(Mathf.Abs(deltaZ) > movespeed)
 				deltaZ = movespeed;
 			
-			Vector3 newPos = new Vector3(gameObject.transform.position.x + (deltaX * directionX), gameObject.transform.position.y, gameObject.transform.position.z + (deltaZ * directionZ));
-			
-			gameObject.transform.position = newPos;
+			(gameObject.GetComponent(typeof(CharacterController)) as CharacterController).Move((dest - gameObject.transform.position).normalized * Time.smoothDeltaTime * 10);
 		}
 		
-		
+		dest.y = gameObject.transform.position.y;
 		gameObject.transform.LookAt(dest);
 		
 	}
 	
-	public void stun(float time){
-		Debug.Log ("Stunned for " + time + "seconds");//Stun duration	
-	}
-	
+	/// <summary>
+	/// Gets the current health percentage of the minon.
+	/// </summary>
+	/// <returns>
+	/// Health percentage of the minion.
+	/// </returns>
 	public float getHealthPercent(){
 		return currentHealth / maxHealth;	
 	}
 	
-	public void damage(float amount){
-		if(!alive)
-			return;
-		
-		foreach(Debuff debuff in debuffs)
-			amount = debuff.applyDebuff(amount);
-		
-		currentHealth -= amount;
-		if(currentHealth < 0){
-			animator.Stop();
-			animator.Play("Death");
-			currentHealth = 0;
-			if(player.getCurrentEnemy() == this)
-				player.setCurrentEnemy(null);
-			alive = false;
-			DropLoot();
-			
-			(gameObject.GetComponent(typeof(SphereCollider)) as SphereCollider).enabled = false;
-		}
-	}
-	
+	/// <summary>
+	/// Gets the destination location of the minion.
+	/// </summary>
+	/// <returns>
+	/// The destination that the minion is heading.
+	/// </returns>
 	public Vector3 getDest(){
 		return dest;
 	}
+	
+	/// <summary>
+	/// Randomly generates and drops loot near the minion's model.
+	/// </summary>
 	private void DropLoot(){
 		
 		//Drop health orbs
@@ -161,30 +197,5 @@ public class MinionScript : EnemyScript {
 		
 		GameObject loot = (GameObject) Instantiate(itemLoot, transform.position, Quaternion.identity);
 		(loot.GetComponent(typeof(ItemLootScript)) as ItemLootScript).randomizeItem();
-	}
-	
-	// Applies a debuff
-	public void applyDebuff(Debuff debuff, bool stacking){
-		if(stacking){
-			bool appliedStack = false;
-			foreach(Debuff d in debuffs){
-				if(d.GetType() == debuff.GetType()){
-					d.applyStack(1);
-					appliedStack = true;
-				}
-			}
-			
-			if(!appliedStack)
-				if(debuffs.Count < maxNumDebuffs){
-					debuffs.Add(debuff);
-			}
-		}
-		else
-			if(debuffs.Count < maxNumDebuffs)
-				debuffs.Add(debuff);
-	}
-	
-	public ArrayList getDebuffs(){
-		return debuffs;	
 	}
 }

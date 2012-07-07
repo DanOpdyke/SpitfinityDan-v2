@@ -1,0 +1,32 @@
+<Position>
+-172.0242,22,-361.1372
+</Position>
+<Inventory>
+Weapon, TwoHandedSword,Dull Two-Handed Sword of Quickness,1,5,8,2,0,26.50365,2.024452,2HSwordTextures/texture5,
+Armor, Chest,Worn Chest of Quickness,1,0,17,0,5,ChestTextures/texture7
+Weapon, TwoHandedSword,Dull Two-Handed Sword of Power,1,17,0,10,0,12.43804,2.538714,2HSwordTextures/texture3,
+Armor, Gloves,Torn Gloves of Fortitude,0,7,0,0,8,GlovesTextures/texture2
+Armor, Gloves,Worn Gloves of Power,1,7,0,5,0,GlovesTextures/texture3
+Weapon, TwoHandedSword,Iron Two-Handed Sword of Power,2,9,0,7,7,16.60888,2.50283,2HSwordTextures/texture1,
+Armor, Helm,Sturdy Helm of Wisdom,3,0,0,22,0,HelmTextures/texture3
+Armor, Helm,Woven Helm of Wisdom,2,0,7,10,3,HelmTextures/texture3
+Armor, Gloves,Heavy Gloves of Fortitude,5,0,0,11,21,GlovesTextures/texture1
+Armor, Chest,Worn Chest of Wisdom,1,7,0,8,7,ChestTextures/texture4
+Weapon, Bow,Engineered Crossbow of Wisdom,4,0,0,16,0,21.25669,2.176851,BowTextures/texture3,
+Armor, Boots,Worn Boots of Fortitude,1,8,0,0,12,BootTextures/texture2
+Armor, Helm,Sturdy Helm of Wisdom,3,0,0,26,10,HelmTextures/texture2
+Armor, Gloves,Woven Gloves of Quickness,2,4,17,0,0,GlovesTextures/texture3
+</Inventory>
+<DateStamp>
+7/1/2012 7:44 PM
+</DateStamp>
+<Level>
+2
+</Level>
+<Equipment>
+Armor, Helm,Worn Helm of Wisdom,1,0,0,19,0,HelmTextures/texture3
+Weapon, TwoHandedSword,Iron Two-Handed Sword of Power,2,13,0,6,0,23.88165,2.213338,2HSwordTextures/texture5,
+Armor, Chest,Woven Chest of Fortitude,2,6,0,0,16,ChestTextures/texture2
+Armor, Gloves,Worn Gloves of Power,1,9,0,6,0,GlovesTextures/texture2
+Armor, Boots,Reinforced Boots of Quickness,4,13,22,0,0,BootTextures/texture4
+</Equipment>

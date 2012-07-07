@@ -1,18 +1,22 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\CasterMinion.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Vayne\VayneScript.cs">
     <Files>
-      <File FileName="Assets\MouseMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets\Cassiopeia.fbm\NoxiousBlastScript.cs" Line="25" Column="29" />
-      <File FileName="Assets\Cassiopeia.fbm\CassiopeiaBossScript.cs" Line="36" Column="23" />
-      <File FileName="Assets\Cassiopeia.fbm\MiasmaScript.cs" Line="28" Column="3" />
-      <File FileName="Assets\MinionScript.cs" Line="31" Column="20" />
-      <File FileName="Assets\CasterMinion.cs" Line="20" Column="22" />
-      <File FileName="Assets\EnemyScript.cs" Line="143" Column="27" />
-      <File FileName="Assets\Garen.fbm\GarenScript.cs" Line="172" Column="1" />
-      <File FileName="Assets\Vayne\VayneScript.cs" Line="108" Column="60" />
-      <File FileName="Assets\CharacterSelectionScreen.cs" Line="37" Column="3" />
-      <File FileName="Assets\CamTargetScript.cs" Line="21" Column="36" />
+      <File FileName="Assets\PhysicsProjectileScript.cs" Line="44" Column="23" />
+      <File FileName="Assets\PickUp.cs" Line="1" Column="1" />
+      <File FileName="Assets\PlayerScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\ProjectileScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\SeekingProjectileScript.cs" Line="48" Column="19" />
+      <File FileName="Assets\SpawnZoneScript.cs" Line="42" Column="32" />
+      <File FileName="Assets\TumbleBuff.cs" Line="43" Column="3" />
+      <File FileName="Assets\Vayne\FinalHourBuff.cs" Line="37" Column="74" />
+      <File FileName="Assets\Vayne\SwiftDeathDebuff.cs" Line="111" Column="26" />
+      <File FileName="Assets\Vayne\VayneCharacterSelectScript.cs" Line="31" Column="59" />
+      <File FileName="Assets\Vayne\VayneInfoScript.cs" Line="42" Column="108" />
+      <File FileName="Assets\Vayne\VayneScript.cs" Line="1031" Column="46" />
+      <File FileName="Assets\Garen.fbm\GarenScript.cs" Line="1096" Column="46" />
+      <File FileName="Assets\EnemyScript.cs" Line="312" Column="55" />
+      <File FileName="Assets\CheckpointScript.cs" Line="41" Column="8" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

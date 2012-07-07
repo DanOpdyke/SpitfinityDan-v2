@@ -1,0 +1,18 @@
+<Position>
+-144.2164,5.702944,-365.1236
+</Position>
+<Inventory>
+Weapon, Bow,Dull Crossbow of Quickness,1,3,9,0,0,8.060503,2.469991,BowTextures/texture6,
+Armor, Helm,Worn Helm of Fortitude,1,0,0,6,17,HelmTextures/texture1
+Armor, Chest,Worn Chest of Power,1,15,2,0,0,ChestTextures/texture9
+Armor, Gloves,Worn Gloves of Power,1,19,0,4,0,GlovesTextures/texture3
+Armor, Boots,Worn Boots of Power,1,12,0,4,0,BootTextures/texture4
+</Inventory>
+<DateStamp>
+7/6/2012 3:21 PM
+</DateStamp>
+<Level>
+1
+</Level>
+<Equipment>
+</Equipment>

@@ -1,0 +1,41 @@
+<Position>
+77.09903,5.702944,-106.7909
+</Position>
+<Inventory>
+Armor, Gloves,Worn Gloves of Quickness,1,5,6,0,6,GlovesTextures/texture1
+Weapon, TwoHandedSword,Steel Two-Handed Sword of Wisdom,3,6,0,7,0,21.03592,2.079309,2HSwordTextures/texture0,
+Weapon, Bow,Dull Crossbow of Power,1,12,2,0,0,21.03366,1.900941,BowTextures/texture2,
+Armor, Boots,Worn Boots of Fortitude,1,4,0,0,9,BootTextures/texture7
+Armor, Boots,Torn Boots of Wisdom,0,0,1,10,0,BootTextures/texture7
+Armor, Boots,Torn Boots of Power,0,6,5,5,0,BootTextures/texture0
+Armor, Boots,Worn Boots of Power,1,16,0,0,0,BootTextures/texture5
+Armor, Gloves,Heavy Gloves of Fortitude,5,0,0,11,21,GlovesTextures/texture1
+Armor, Gloves,Woven Gloves of Power,2,20,0,9,0,GlovesTextures/texture3
+Weapon, Bow,Iron Crossbow of Quickness,2,9,10,9,0,21.29166,2.698414,BowTextures/texture3,
+Armor, Chest,Heavy Chest of Fortitude,5,26,0,0,44,ChestTextures/texture1
+Weapon, Bow,Iron Crossbow of Quickness,2,0,8,5,2,7.809206,2.613988,BowTextures/texture3,
+Armor, Helm,Woven Helm of Fortitude,2,0,0,0,20,HelmTextures/texture0
+Weapon, Bow,Iron Crossbow of Quickness,2,0,10,5,0,28.85376,2.688707,BowTextures/texture1,
+Armor, Helm,Woven Helm of Wisdom,2,0,0,17,13,HelmTextures/texture1
+Armor, Helm,Woven Helm of Power,2,8,5,1,0,HelmTextures/texture1
+Armor, Boots,Woven Boots of Wisdom,2,0,3,4,3,BootTextures/texture1
+Weapon, Bow,Iron Crossbow of Power,2,19,0,0,7,34.80445,1.87403,BowTextures/texture4,
+Weapon, Bow,Steel Crossbow of Wisdom,3,8,7,10,0,23.49152,2.035758,BowTextures/texture6,
+Armor, Boots,Woven Boots of Quickness,2,0,13,9,12,BootTextures/texture5
+</Inventory>
+<DateStamp>
+6/30/2012 1:33 PM
+</DateStamp>
+<Level>
+3
+</Level>
+<Equipment>
+Armor, Helm,Heavy Helm of Quickness,5,0,33,0,18,HelmTextures/texture3
+Weapon, Bow,Hextech Gunblade,5,20,50,50,10,70,2.2,LegendaryBowTextures/HextechGunblade,"Useful for stabbing AND shooting... 
+but mostly shooting."
+Weapon, Bow,Ionic Spark,5,20,40,0,50,40,2.6,LegendaryBowTextures/IonicSpark,"Let's just pretend this 
+ does chain lightning."
+Armor, Chest,Heavy Chest of Fortitude,5,0,0,0,93,ChestTextures/texture4
+Armor, Gloves,Reinforced Gloves of Quickness,4,0,11,4,6,GlovesTextures/texture0
+Armor, Boots,Heavy Boots of Power,5,34,33,33,0,BootTextures/texture6
+</Equipment>

@@ -1,0 +1,18 @@
+<Position>
+59.46194,21.92963,-93.49714
+</Position>
+<Inventory>
+Weapon, TwoHandedSword,Dull Two-Handed Sword of Power,1,10,0,6,0,17.63503,2.448079,2HSwordTextures/texture5,
+Armor, Helm,Worn Helm of Quickness,1,7,8,0,4,HelmTextures/texture0
+Armor, Chest,Worn Chest of Power,1,9,0,5,4,ChestTextures/texture3
+Armor, Gloves,Worn Gloves of Power,1,16,0,7,0,GlovesTextures/texture2
+Armor, Boots,Worn Boots of Quickness,1,0,22,0,0,BootTextures/texture1
+</Inventory>
+<DateStamp>
+7/6/2012 3:23 PM
+</DateStamp>
+<Level>
+1
+</Level>
+<Equipment>
+</Equipment>

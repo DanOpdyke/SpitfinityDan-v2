@@ -1,0 +1,22 @@
+Cassiopeia animation times
+
+Name        Start     End    Length
+Attack1     1597      1627   30
+Attack2     1628      1658   30
+Dance       391       763    372
+Death       1242      1382   140
+Idle1       1169      1199   72
+Idle2       1383      1506   123
+Idle3       1096      1241   145
+Joke        951       1095   145
+Laugh       764       950    186
+Run         1659      1689   30
+Spell1      1690      1720   30
+Spell2      1558      1596   38
+Spell3      1721      1756   35
+Spell4      1507      1557   50
+Taunt       0         390    390
+
+Full animation - 1756 frames
+
+

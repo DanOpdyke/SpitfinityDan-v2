@@ -45,16 +45,28 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Ability.cs" />
+     <Compile Include="Assets\BuildingOpacityScript.cs" />
      <Compile Include="Assets\CamTargetScript.cs" />
      <Compile Include="Assets\Cassiopeia.fbm\CassiopeiaBossScript.cs" />
+     <Compile Include="Assets\Cassiopeia.fbm\MiasmaDebuff.cs" />
      <Compile Include="Assets\Cassiopeia.fbm\MiasmaScript.cs" />
+     <Compile Include="Assets\Cassiopeia.fbm\NoxiousBlastDebuff.cs" />
      <Compile Include="Assets\Cassiopeia.fbm\NoxiousBlastScript.cs" />
      <Compile Include="Assets\CasterMinion.cs" />
+     <Compile Include="Assets\CharacterSelectionLight.cs" />
      <Compile Include="Assets\CharacterSelectionScreen.cs" />
+     <Compile Include="Assets\CheckpointScript.cs" />
+     <Compile Include="Assets\Credit Screen textures\CassCreditsScript.cs" />
+     <Compile Include="Assets\Credit Screen textures\CreditScreenScript.cs" />
+     <Compile Include="Assets\Credit Screen textures\RyzeCreditsScript.cs" />
      <Compile Include="Assets\Debuff.cs" />
      <Compile Include="Assets\EnemyHealthBarRotation.cs" />
      <Compile Include="Assets\EnemyScript.cs" />
+     <Compile Include="Assets\Garen.fbm\CourageBuff.cs" />
+     <Compile Include="Assets\Garen.fbm\GarenCharacterSelectScript.cs" />
+     <Compile Include="Assets\Garen.fbm\GarenInfoScript.cs" />
      <Compile Include="Assets\Garen.fbm\GarenScript.cs" />
+     <Compile Include="Assets\Garen.fbm\ValorDebuff.cs" />
      <Compile Include="Assets\HealthOrbScript.cs" />
      <Compile Include="Assets\Items\Armor\Armor.cs" />
      <Compile Include="Assets\Items\Armor\Boots.cs" />
@@ -63,14 +75,25 @@
      <Compile Include="Assets\Items\Armor\Helm.cs" />
      <Compile Include="Assets\Items\Item.cs" />
      <Compile Include="Assets\Items\ItemLootScript.cs" />
+     <Compile Include="Assets\Items\Weapons\Bow.cs" />
      <Compile Include="Assets\Items\Weapons\TwoHandedSword.cs" />
      <Compile Include="Assets\Items\Weapons\Weapon.cs" />
+     <Compile Include="Assets\LoadScript.cs" />
+     <Compile Include="Assets\MinimapCamera.cs" />
      <Compile Include="Assets\MinionScript.cs" />
      <Compile Include="Assets\MouseMovement.cs" />
+     <Compile Include="Assets\PhysicsProjectileScript.cs" />
      <Compile Include="Assets\PickUp.cs" />
      <Compile Include="Assets\PlayerScript.cs" />
      <Compile Include="Assets\ProjectileScript.cs" />
-     <Compile Include="Assets\ValorDebuff.cs" />
+     <Compile Include="Assets\Resources\InstructionPage\InstructionsScript.cs" />
+     <Compile Include="Assets\SeekingProjectileScript.cs" />
+     <Compile Include="Assets\SpawnZoneScript.cs" />
+     <Compile Include="Assets\TumbleBuff.cs" />
+     <Compile Include="Assets\Vayne\FinalHourBuff.cs" />
+     <Compile Include="Assets\Vayne\SwiftDeathDebuff.cs" />
+     <Compile Include="Assets\Vayne\VayneCharacterSelectScript.cs" />
+     <Compile Include="Assets\Vayne\VayneInfoScript.cs" />
      <Compile Include="Assets\Vayne\VayneScript.cs" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Standard Assets (Mobile)\Shaders\Particle Shaders\Mobile Multiply Culled.shader" />
@@ -91,6 +114,8 @@
      <None Include="Assets\Standard Assets (Mobile)\Shaders\Vertex Colored Shaders\Mobile Vertex Colored.shader" />
      <None Include="Assets\Standard Assets (Mobile)\Shaders\Lightmap Shaders (Legacy)\Mobile Lightmap Only.shader" />
      <None Include="Assets\Standard Assets (Mobile)\Shaders\Lightmap Shaders (Legacy)\Mobile Lightmap AlphaTest.shader" />
+     <None Include="Assets\Cassiopeia2.fbm\CassiopeiaDeathAnimationTimes.txt" />
+     <None Include="Assets\Cassiopeia2.fbm\CassiopeiaAnimationTimes.txt" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>

@@ -1,25 +1,71 @@
+/*
+ * Filename: CasterMinion.cs
+ * 
+ * Author:
+ * 		Programming: Daniel Opdyke
+ * 
+ * Last Modified: 7/6/2012
+ * 
+ * NOTE: All Models, Original Character Concepts, and Icons are property of Riot Games.
+ * */
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// The Caster Minion script simluates the basic behavior of a ranged minion. If the Player is outside of the minion's
+/// attack range, it will attempt to move towards the Player. In future iterations, minions will be given pathfinding
+/// scripts, as currently they will get stuck at walls between themself and the Player. When within attack range, the caster
+/// minion will fire a dodgeable missile towards the Player. 
+/// 
+/// Currently, there is a fairly large amount of redundent code between the melee and caster minion's update functions. In future
+/// iterations, the redundant code will be moved into the EnemyScript super class, and each subclass will begin their update functions
+/// by called "Super.Update()".
+/// </summary>
 public class CasterMinion : EnemyScript {
+	
+	/// <summary>
+	/// The maximum number of missles this minion may have active at a single time. Currently, the game is not large enough
+	/// in scale for this to matter, but in future iterations, this will help to avoid overwhelming framerate issues.
+	/// </summary>
 	private int numMaxMissles = 10;
+	
+	/// <summary>
+	/// The index of the next free missle slots. In future iterations, missles will be pulled from a pool instead of instantiated,
+	/// to reduce unneccesary overhead.
+	/// </summary>
 	private int index = 0;
 	
+	/// <summary>
+	/// The missles projectile to be instantiated when the caster minion attacks.
+	/// </summary>
 	public GameObject wizmis;
 	
 	// Use this for initialization
 	void Start () {
 		alive = true;
-		animator = gameObject.GetComponent(typeof(Animation)) as Animation;
-		currentHealth = 70;
-		debuffs = new ArrayList();
-		maxHealth = 70;
-		player = GameObject.FindGameObjectWithTag("Player").GetComponent(typeof(PlayerScript)) as PlayerScript;
 		range = 70;
-		weaponDamage = 10;
+		
+		//We generally like to avoid try catch blockes. However, in Unity, it is required that a "dummy" instance of every object be 
+		//present at the beginning of the game, or more mobs cannot be spawned. Since this "dummy" instance is present before the player
+		//is instantied, it will be unable to find the player, and this initialization will fail. To remedy this situation, we surround
+		//this assignment in a try-catch, then look to update the assignment in the "update" function. Future iterations should look
+		//to address this Unity flaw.
+		try{
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent(typeof(PlayerScript)) as PlayerScript;
+		} catch{
+			;	
+		}
+		animator = gameObject.GetComponent(typeof(Animation)) as Animation;
+		debuffs = new Hashtable();
+		maxHealth = 100 * Mathf.Pow(2, player.Level);
+		currentHealth = maxHealth;
+		weaponDamage = 5 * Mathf.Pow(2, player.Level);
 		weaponSpeed = 1.5f;
 	}
 	
+	/// <summary>
+	/// Draws the minion's health bar above their position.
+	/// </summary>
 	void OnGUI(){
 		if(getHealthPercent() > 0){ //If not dead
 			Vector3 healthBarPosition = Camera.main.WorldToScreenPoint(gameObject.transform.position);
@@ -30,7 +76,10 @@ public class CasterMinion : EnemyScript {
 	
 	// Update is called once per frame
 	void Update () {
-	if(!alive)
+		if(Time.time > deathTimer && !alive)
+			Destroy(gameObject);
+		
+		if(!alive || Time.time < stunTime)
 			return;
 		
 		if(player == null)
@@ -40,11 +89,19 @@ public class CasterMinion : EnemyScript {
 			return; //TODO make this more interesting after the player dies
 		}
 		
-		for(int i = 0; i < debuffs.Count; i++)
-			if(((Debuff)debuffs[i]).hasExpired()){
-				debuffs.Remove(i--);
-				Debug.Log("Debuff expired");
+		string[] keys = new string[debuffs.Keys.Count];
+		debuffs.Keys.CopyTo(keys, 0);
+		
+		//Check for expired debuffs
+		foreach(string obj in keys){
+			Debuff debuff = (Debuff) debuffs[obj];
+			if(debuff.hasExpired()){
+				debuff.expire(player);
+				debuffs.Remove(debuff.name());
 			}
+		}
+		
+		updateDebuffs();
 		
 		if(Time.time > fleeTime)
 			fleeing = false;
@@ -74,18 +131,14 @@ public class CasterMinion : EnemyScript {
 				
 				if(index <= 9){
 					Vector3 spawnLocation = gameObject.transform.position;
-					spawnLocation.y = 12.0f;
+					spawnLocation.y = player.getGameObject().transform.position.y;
 					
 					GameObject temp = (GameObject) Instantiate(wizmis, spawnLocation, gameObject.transform.rotation);
-					ProjectileScript script = temp.GetComponent(typeof(ProjectileScript)) as ProjectileScript;
-					script.setDest(player.getGameObject().transform.position);
-					script.setPlayer(player);
-					
-					/*Missle m = new Missle();
-					Vector3 healthBarPosition = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-					m.setX(healthBarPosition.x);
-					m.setY(Screen.height - healthBarPosition.y);
-					activeMissles[index++] = m;*/
+					PhysicsProjectileScript script = temp.GetComponent(typeof(PhysicsProjectileScript)) as PhysicsProjectileScript;
+					script.setSpeed(20);
+					script.setDamage(weaponDamage);
+					script.setTimeToLive(8);
+					script.setDestination(player.getGameObject().transform.position);
 				}
 				
 				nextAttack = Time.time + weaponSpeed;
@@ -96,6 +149,9 @@ public class CasterMinion : EnemyScript {
 		
 		//If not in attack range
 		else{
+			if(snareTimer > Time.time)
+				return;
+			
 			if(!animator.IsPlaying("Run")){
 				animator.Stop();
 				animator.Play("Run");
@@ -103,25 +159,10 @@ public class CasterMinion : EnemyScript {
 			if(!fleeing)
 				dest = player.getGameObject().transform.position;
 			
-			//TODO Implement pathfinding algorithm to avoid running through objects
-			int directionX = dest.x > gameObject.transform.position.x ? 1 : -1;
-			
-			float deltaX = dest.x - gameObject.transform.position.x;
-			if(Mathf.Abs(deltaX) > movespeed)
-				deltaX = movespeed;
-			
-			int directionZ = dest.z > gameObject.transform.position.z ? 1 : -1;
-			
-			float deltaZ = dest.z - gameObject.transform.position.z;
-			if(Mathf.Abs(deltaZ) > movespeed)
-				deltaZ = movespeed;
-			
-			Vector3 newPos = new Vector3(gameObject.transform.position.x + (deltaX * directionX), gameObject.transform.position.y, gameObject.transform.position.z + (deltaZ * directionZ));
-			
-			gameObject.transform.position = newPos;
+			(gameObject.GetComponent(typeof(CharacterController)) as CharacterController).Move((dest - gameObject.transform.position).normalized * Time.smoothDeltaTime * 10);
 		}
 		
-		
+		dest.y = gameObject.transform.position.y;
 		gameObject.transform.LookAt(dest);
 		
 	}

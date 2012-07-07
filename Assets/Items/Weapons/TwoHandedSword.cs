@@ -1,94 +1,30 @@
+/*
+ * Filename: TwoHandedSword.cs
+ * 
+ * Author:
+ * 		Programming: Daniel Opdyke, David Spitler
+ * 
+ * Last Modified: 7/6/2012
+ * 
+ * NOTE: All Models, Original Character Concepts, and Icons are property of Riot Games.
+ * */
 using UnityEngine;
 using System.Collections;
 
-public class TwoHandedSword : MonoBehaviour, Item, Weapon {
-	private Texture2D texture;
-	private int numTextures = 6;
-	private int itemRarity;
+/// <summary>
+/// Simulates a Two-Handed Sword Weapon.
+/// </summary>
+public class TwoHandedSword : Weapon, Item {
 	
-	
-	#region Weapon Stats
-	private int strength;
-	
-	public int Strength {
-		get
-		{	
-			return this.strength;
-		}
-		set
-		{
-			strength = value;
-		}
+	/// <summary>
+	/// Initializes a new instance of the <see cref="TwoHandedSword"/> class.
+	/// </summary>
+	public TwoHandedSword(){
+		numTextures = 6;
+		Name = "Two-Handed Sword";
+		texturePath = "2HSwordTextures/texture";
+		flavorText = null;
 	}
-	
-	private int dexterity;
-
-	public int Dexterity {
-		get {
-			return this.dexterity;
-		}
-		set {
-			dexterity = value;
-		}
-	}	
-	
-	private int intelligence;
-	
-	private int vitality;
-
-	public int Intelligence {
-		get {
-			return this.intelligence;
-		}
-		set {
-			intelligence = value;
-		}
-	}
-
-	public int Vitality {
-		get {
-			return this.vitality;
-		}
-		set {
-			vitality = value;
-		}
-	}	
-	
-	private float weaponDamage;
-	
-	private float weaponSpeed;
-
-	public string Name {
-		get {
-			return this.name;
-		}
-		set {
-			name = value;
-		}
-	}
-
-	public float WeaponDamage {
-		get {
-			return this.weaponDamage;
-		}
-		set {
-			weaponDamage = value;
-		}
-	}
-
-	public float WeaponSpeed {
-		get {
-			return this.weaponSpeed;
-		}
-		set {
-			weaponSpeed = value;
-		}
-	}
-
-	private string name;
-	#endregion
-	
-	
 	// Use this for initialization
 	void Start () {
 		
@@ -103,85 +39,6 @@ public class TwoHandedSword : MonoBehaviour, Item, Weapon {
 		
 	}
 	
-	public string getStats(){
-		
-		string toReturn = name + "\n";
-		if(strength > 0)
-			toReturn += "Strength: " + strength + "\n";
-		if(dexterity > 0)
-			toReturn += "Dexterity: " + dexterity + "\n";
-		if(intelligence > 0)
-			toReturn += "Intelligence: " + intelligence + "\n";
-		if(vitality > 0)
-			toReturn += "Vitality: " + vitality + "\n";
-		
-		toReturn += "Weapon Damage: " + weaponDamage.ToString("0.00") + "\n" +
-			"Weapon Speed: " + weaponSpeed.ToString("0.00") + "\n";
-		
-		return toReturn;
-			
-	}
-	
-	
-	public void randomizeWeapon(int level){
-		float rarityPercent = Random.value;
-		
-		if(rarityPercent <= 0.3f)
-			itemRarity = 0;
-		else if(rarityPercent <= 0.6f)
-			itemRarity = 1;
-		else if(rarityPercent <= 0.80f)
-			itemRarity = 2;
-		else if(rarityPercent <= 0.90f)
-			itemRarity = 3;
-		else if(rarityPercent <= 0.96f)
-			itemRarity = 4;
-		else
-			itemRarity = 5;
-		
-		float effectiveWeaponLevel = Random.value * 2 * level * itemRarity;
-		
-		//Allow each item to have up to three stats on it
-		for(int i = 0; i < 3; i++)
-		{
-			int amountToIncrease = (int) Random.Range(1+effectiveWeaponLevel, 10 + effectiveWeaponLevel);
-			increaseStat(Random.Range(0, 4), amountToIncrease);
-		}
-		
-		float weaponSpeedRange = 0.9f;
-		weaponSpeed = Random.value * weaponSpeedRange + 1.8f;
-		
-		float weaponDamageRange = 20f;
-		weaponDamage = Random.value * weaponDamageRange + (effectiveWeaponLevel * 7);
-		
-		name = "Generic 2 Hander";
-		texture = Resources.Load("2HSwordTextures/texture" + Random.Range(0, numTextures)) as Texture2D;
-		
-	}
-	
-	private void increaseStat(int statNum, int amount){
-		switch(statNum){
-		case 0:
-			this.strength += amount;
-			goto default;
-		case 1:
-			this.dexterity += amount;
-			goto default;
-		case 2:
-			this.intelligence += amount;
-			goto default;
-		case 3:
-			this.vitality += amount;
-			goto default;
-		default:
-			break;
-		}
-	}
-	
-	public Texture2D getTexture(){
-		return texture;
-	}
-	
 	public int getItemRarity(){
 		return this.itemRarity;
 	}
@@ -192,5 +49,71 @@ public class TwoHandedSword : MonoBehaviour, Item, Weapon {
 	
 	public void randomize(int level){
 		this.randomizeWeapon(level);	
+	}
+	
+	public override void makeLegendary(){
+		string[] legendarySwords = {"Trinity Force", "Infinity Edge", "Youmuu's Ghostblade,", "Guinsoo's Rageblade", "Phreak's \"IPlayThisChampionAsAJungler\" Sword"};
+		
+		numTextures = 5;
+		
+		int index = Random.Range (0,5);
+		Name = legendarySwords[index];
+		texturePath = "LegendarySwordTextures/texture";
+		
+		if(index == 0){
+			Strength = 20;
+			Dexterity = 20;
+			Intelligence = 20;
+			Vitality = 20;
+			WeaponDamage = 40f;
+			WeaponSpeed = 2.2f;
+			texturePath = "LegendarySwordTextures/TrinityForce";
+			Texture = Resources.Load(texturePath) as Texture2D;
+			flavorText = "\"Balance in everything allows for \n Massive Damage.\""; 
+		}
+		else if(index == 1){
+			Strength = 40;
+			Dexterity = 10;
+			Intelligence = 0;
+			Vitality = 10;
+			WeaponDamage = 70f;
+			WeaponSpeed = 2.0f;
+			texturePath = "LegendarySwordTextures/InfinityEdge";
+			Texture = Resources.Load(texturePath) as Texture2D;
+			flavorText = "\"When the sun is at its peak, the pool \n blends in with the shimmering heat, \n looking as if its waters run off into infinity.\"";
+		}
+		else if(index == 2){
+			Strength = 30;
+			Dexterity = 20;
+			Intelligence = 0;
+			Vitality = 20;
+			WeaponDamage = 50f;
+			WeaponSpeed = 2.6f;
+			texturePath = "LegendarySwordTextures/YoumuusGhostblade";
+			Texture = Resources.Load(texturePath) as Texture2D;
+			flavorText = "\"It is said that this blade may \n be purely imagined by its \n wielder, as it cannot be seen by anyone else.\"";
+		}
+		else if(index == 3){
+			Strength = 35;
+			Dexterity = 0;
+			Intelligence = 50;
+			Vitality = 10;
+			WeaponDamage = 40f;
+			WeaponSpeed = 2.4f;
+			texturePath = "LegendarySwordTextures/GuinsoosRageblade";
+			Texture = Resources.Load (texturePath) as Texture2D;
+			flavorText = "\"Crumble, before my wrath\n ...and nerfs to your favorite champ.\"";
+		}
+		else{
+			Strength = 50;
+			Dexterity = 50;
+			Intelligence = 50;
+			Vitality = 50;
+			WeaponDamage = 70f;
+			WeaponSpeed = 2.6f;
+			texturePath = "LegendarySwordTextures/Phreak";
+			Texture = Resources.Load (texturePath) as Texture2D;
+			flavorText = "\"Get On My Level \n ...and make more Teemo skins.\"";
+		}
 	}
 }
